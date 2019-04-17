@@ -10,13 +10,6 @@ public class Board {
                 gameBoard[i][j] = new square(i, j);
             }
         }
-
-        gameBoard[0][0].setName("D");
-        gameBoard[1][1].setName("S");
-        gameBoard[1][2].setName("S");
-        gameBoard[2][2].setName("S");
-        gameBoard[3][2].setName("S");
-
     }
 
 
