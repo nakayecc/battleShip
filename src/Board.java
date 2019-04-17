@@ -2,7 +2,7 @@
 public class Board {
     private static final int boardHeight = 10;
     private static final int boardWidth = 10;
-    private static square[][] gameBoard = new square[10][10];
+    private square[][] gameBoard = new square[10][10];
 
     public Board() {
         for (int i = 0; i < boardHeight; i++) {
@@ -52,7 +52,7 @@ public class Board {
         System.out.println(separator);
     }
 
-    public static square[][] getGameBoard() {
+    public square[][] getGameBoard() {
         return gameBoard;
     }
 }
