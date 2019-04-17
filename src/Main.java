@@ -3,7 +3,9 @@ public class Main {
         //Menu.menu();
 
         Board board = new Board();
+        Shipyard sy = new Shipyard(board);
 
-        board.printBoard();
+        //board.printBoard();
+        System.out.println(sy);
     }
 }
