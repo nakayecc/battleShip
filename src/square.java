@@ -6,7 +6,7 @@ public class square {
     public square(int x, int y) {
         this.xPos = x;
         this.yPos = y;
-        this.name="W";
+        this.name=" ";
 
     }
 
