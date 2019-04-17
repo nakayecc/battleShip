@@ -1,19 +1,21 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Shipyard {
-    private List<Shipyard> fleet;
+    private List fleet;
     private square board[][];
     private Board boardTable;
 
     public Shipyard(Board board) {
         this.boardTable = board;
         this.board = boardTable.getGameBoard();
+        this.fleet = new ArrayList();
 
     }
 
 
     public void makeShip(String shipClass, int posX, int posY, String direction) {
-        List<square> ship;
+        List<square> ship = new ArrayList();
         int shipLen = 0;
         int endPosX = 0;
         int endPosY = 0;
@@ -59,7 +61,7 @@ public class Shipyard {
         if (checkSpace(board, posX, posY, endPosX, endPosY, shipLen, "left")) {
             for (int len = 0; len < shipLen; len++) {
                 board[posX][posY].setName("S");
-                ;
+                ship.add(board[posX][posY]);
                 if (direction == "left") {
                     posX -= 1;
                 } else if (direction == "right") {
@@ -71,6 +73,7 @@ public class Shipyard {
                 }
             }
         }
+        fleet.add(ship);
 
 
     }
@@ -137,5 +140,7 @@ public class Shipyard {
         return false;
     }
 
-
+    public List getFleet() {
+        return fleet;
+    }
 }
