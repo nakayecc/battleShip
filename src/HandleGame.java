@@ -23,7 +23,11 @@ public class HandleGame
             System.out.print("Enter y position: ");
             int y = userInput.nextInt();
             System.out.println("Your score: " + player.getScore());
-            shot(x, y);
+            if(x < 9 && y <9) {
+                shot(x, y);
+            } else {
+                System.out.println("Enter correct coordinates!");
+            }
         }
     }
 
