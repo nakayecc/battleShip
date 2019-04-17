@@ -1,17 +1,17 @@
 public class Player {
-    private int lives = 10;
+    private boolean turn;
     private int score = 0;
 
-    public int getLives() {
-        return lives;
+    public boolean getTurn() {
+        return turn;
     }
 
     public int getScore() {
         return score;
     }
 
-    public void setLives(int lives) {
-        this.lives = lives;
+    public void setTurn(boolean turn) {
+        this.turn = turn;
     }
 
     public void setScore(int score) {
