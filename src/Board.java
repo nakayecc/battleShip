@@ -2,7 +2,7 @@
 public class Board {
     private static final int boardHeight = 10;
     private static final int boardWidth = 10;
-    private static square[][] gameBoard = new square[10][10];
+    private square[][] gameBoard = new square[10][10];
 
     public Board() {
         for (int i = 0; i < boardHeight; i++) {
@@ -11,6 +11,8 @@ public class Board {
             }
         }
 
+        gameBoard[0][0].setName("D");
+        gameBoard[1][1].setName("S");
         gameBoard[1][2].setName("S");
         gameBoard[2][2].setName("S");
         gameBoard[3][2].setName("S");
@@ -22,7 +24,7 @@ public class Board {
         char pipeVertical = '\u2502';
         char pipeHorizontal = '\u2015';
         String topMarks = "ABCDEFGHIJ";
-        String sideMarks = "0123456789";
+        String sideMarks = "1234567890";
 
         String separator = "";
 
@@ -51,4 +53,9 @@ public class Board {
         }
         System.out.println(separator);
     }
+
+    public  square[][] getGameBoard() {
+        return gameBoard;
+    }
 }
+
