@@ -51,4 +51,8 @@ public class Board {
         }
         System.out.println(separator);
     }
+
+    public static square[][] getGameBoard() {
+        return gameBoard;
+    }
 }

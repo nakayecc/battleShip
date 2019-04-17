@@ -2,11 +2,34 @@ import java.util.Scanner;
 
 public class HandleGame
 {
-    private int x;
-    private int y;
-    private int hits;
-    private boolean isDestroyed;
 
-    Scanner userShot = new Scanner(System.in);
+
+
+
+    public void runApp(){
+        Board board = new Board();
+        Scanner userShotX = new Scanner(System.in);
+        Scanner userShotY = new Scanner(System.in);
+        board.printBoard();
+        int x = userShotX.nextInt();
+        int y = userShotY.nextInt();
+        shot(x, y);
+        board.printBoard();
+
+
+    }
+
+    private void shot(int x, int y){
+        square[][] board = Board.getGameBoard();
+        if(board[x][y].getName() == "S") {
+            board[x][y].setName("X");
+        }
+        System.out.println(board[x][y]);
+
+
+
+
+
+    }
     
 }
