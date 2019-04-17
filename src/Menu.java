@@ -13,10 +13,13 @@ public class Menu {
             userInput.next();
         }
 
+        Board board = new Board();
+        Shipyard sy = new Shipyard(board);
+
         switch(userInput.nextInt())
         {
             case 1:
-                System.out.println("New game");
+                board.printBoard();
                 break;
             case 2:
                 System.out.println("Hall of fame");
