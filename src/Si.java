@@ -43,6 +43,8 @@ public class Si {
             int x = randomCoordinates.nextInt(9);
             int y = randomCoordinates.nextInt(9);
 
+
+
             switch (difficulty) {
                 case 1: {
                     if (gameBoard[x][y].getName() == "S" || gameBoard[x][y].getName() == "X") {
@@ -53,20 +55,22 @@ public class Si {
                         this.siTurn = false;
 
                     }
+                    break;
 
                 }
                 case 2: {
-                    if (gameBoard[x][y].getName() == "S") {
+                    if (gameBoard[x][y].getName() == "S" || gameBoard[x][y].getName() == "X") {
                         gameBoard[x][y].setName("X");
                         gameBoard[x][y].setDestroyed(true);
+                        System.out.println(x + " " + y);
                         checkAreaNearHitPlaceLevelMedium(x, y);
 
                     } else {
                         gameBoard[x][y].setName("O");
+                        System.out.println(x + " " + y);
                         this.siTurn = false;
                     }
-
-
+                    break;
                 }
             }
         }
@@ -76,18 +80,12 @@ public class Si {
         // x right left
         //y up down
         //check right left area
-        int oldXright = x;
-        int oldXleft = x;
-        int oldYup = y;
-        int oldYdown = y;
-        int right = oldXright + 1;
-        int left = oldXleft - 1;
-        int up = oldYup + 1;
-        int down = oldYdown - 1;
+        int up = x - 1;
+        int down = x + 1;
+        int right = y + 1;
+        int left = y - 1;
         Random randomDirection = new Random();
         int direction = randomDirection.nextInt(3);
-        System.out.println(direction);
-
 
         while(siTurn) {
             /*direction 0 = right
@@ -98,67 +96,78 @@ public class Si {
 
             switch (direction) {
                 case 0: {
-                    if (x < 9) {
-                        if (gameBoard[right][y].getName() == "S" || gameBoard[right][y].getName() == "X") {
-                            gameBoard[right][y].setName("X");
-                            gameBoard[right][y].setDestroyed(true);
-                            oldXright = right;
+                    //right
+                    if (y < 9 && y != 0) {
+
+                        if (gameBoard[x][right].getName() == "S" || gameBoard[x][right].getName() == "X") {
+                            gameBoard[x][right].setName("X");
+                            gameBoard[x][right].setDestroyed(true);
+                            right += 1;
                         } else {
-                            gameBoard[right][y].setName("O");
+                            gameBoard[x][right].setName("O");
                             this.siTurn = false;
                             break;
                         }
-                    } else {
+                    }else {
                         direction = 1;
                     }
+                    break;
 
                 }
                 case 1: {
-                    if (x > 0) {
-                        if (gameBoard[left][y].getName() == "S" || gameBoard[left][y].getName() == "X") {
-                            gameBoard[left][y].setName("X");
-                            gameBoard[left][y].setDestroyed(true);
-                            oldXleft = left;
+                    //left
+                    if (y > 0 && y != 9) {
+                        if (gameBoard[x][left].getName() == "S" || gameBoard[x][left].getName() == "X") {
+                            gameBoard[x][left].setName("X");
+                            gameBoard[x][left].setDestroyed(true);
+                            left -= 1;
                         } else {
-                            gameBoard[left][y].setName("O");
+                            gameBoard[x][left].setName("O");
                             this.siTurn = false;
                             break;
                         }
                     } else {
                         direction = 0;
                     }
+                    break;
                 }
                 case 2: {
-                    if (y < 9) {
-                        if (gameBoard[x][up].getName() == "S" || gameBoard[x][up].getName() == "X") {
-                            gameBoard[x][up].setName("X");
-                            gameBoard[x][up].setDestroyed(true);
-                            oldYup = up;
+                    //up
+                    if (x <= 9 && x != 0) {
+                        if (gameBoard[up][y].getName() == "S" || gameBoard[up][y].getName() == "X") {
+                            gameBoard[up][y].setName("X");
+                            gameBoard[up][y].setDestroyed(true);
+                            up -= 1;
                         } else {
-                            gameBoard[x][up].setName("O");
+                            gameBoard[up][y].setName("O");
                             this.siTurn = false;
                             break;
                         }
                     } else {
                         direction = 3;
                     }
+                    break;
                 }
                 case 3: {
-                    if (y > 0) {
-                        if (gameBoard[x][down].getName() == "S" || gameBoard[x][down].getName() == "X") {
-                            gameBoard[x][down].setName("X");
-                            gameBoard[x][down].setDestroyed(true);
-                            oldYdown = down;
+                    //down
+                    if (x > 0 && x != 9) {
+                        if (gameBoard[down][y].getName() == "S" || gameBoard[down][y].getName() == "X") {
+                            gameBoard[down][y].setName("X");
+                            gameBoard[down][y].setDestroyed(true);
+                            down += 1;
                         } else {
-                            gameBoard[x][down].setName("O");
+                            gameBoard[down][y].setName("O");
                             this.siTurn = false;
                             break;
                         }
                     } else {
                         direction = 2;
                     }
+                    break;
                 }
             }
         }
     }
+
+
 }
