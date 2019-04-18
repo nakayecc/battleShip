@@ -1,29 +1,37 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-public class HandleGame
-{
-    private Player player = new Player();
-    private Board board = new Board();
-    private Si si = new Si(board);
+public class HandleGame {
+    private Player player;
+    private Board board;
+    private Shipyard shipyard;
+    //private Si si = new Si(board);
     private boolean gameIsRunning;
-    private int score = player.getScore();
+    //private int score = player.getScore();
+    private List<List<ShipPart>> ships;
 
+    public HandleGame(Board board) {
+        //player = new Player();
+        this.board = board;
+        shipyard = new Shipyard(board);
+    }
 
 
     public Player getPlayer() {
         return player;
     }
 
-    public void runApp(){
+   /* public void runApp() {
         Scanner userInput = new Scanner(System.in);
         this.gameIsRunning = true;
         player.setTurn(true);
 
         System.out.println(player.getTurn());
 
-        while(this.gameIsRunning) {
+        while (this.gameIsRunning) {
             player.setTurn(true);
-            while(player.getTurn()) {
+            while (player.getTurn()) {
                 board.printBoard();
                 System.out.print("Enter x position: ");
                 int x = userInput.nextInt();
@@ -36,15 +44,14 @@ public class HandleGame
                     System.out.println("Enter correct coordinates!");
                 }
             }
-            while(si.getSiTurn()){
+            while (si.getSiTurn()) {
                 playVsSi();
             }
         }
-    }
+    }*/
 
-    private void shot(int x, int y){
 
-        if(board.getGameBoard()[x][y].getName() == "S") {
+       /* if(board.getGameBoard()[x][y].getName() == "S") {
             board.getGameBoard()[x][y].setName("X");
             board.getGameBoard()[x][y].setDestroyed(true);
             player.setScore(this.score += 1);
@@ -57,13 +64,15 @@ public class HandleGame
             si.setDifficulty(3);
             si.setSiTurn(true);
         }
-    }
+    }*/
+/*
 
     private void playVsSi(){
 
         si.setSiTurn(true);
         si.siStartGame();
     }
+*/
 
     public void setGameIsRunning(boolean gameIsRunning) {
         this.gameIsRunning = gameIsRunning;
