@@ -106,6 +106,7 @@ public class Si {
                         } else {
                             gameBoard[right][y].setName("O");
                             this.siTurn = false;
+                            break;
                         }
                     } else {
                         direction = 1;
@@ -121,6 +122,7 @@ public class Si {
                         } else {
                             gameBoard[left][y].setName("O");
                             this.siTurn = false;
+                            break;
                         }
                     } else {
                         direction = 0;
@@ -135,6 +137,7 @@ public class Si {
                         } else {
                             gameBoard[x][up].setName("O");
                             this.siTurn = false;
+                            break;
                         }
                     } else {
                         direction = 3;
@@ -149,6 +152,7 @@ public class Si {
                         } else {
                             gameBoard[x][down].setName("O");
                             this.siTurn = false;
+                            break;
                         }
                     } else {
                         direction = 2;
