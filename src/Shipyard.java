@@ -105,26 +105,22 @@ public class Shipyard {
                         if (checkLeftSpace(board, startPosX, startPosY)) {
                             return false;
                         }
-                        startPosX -= 1;
                         break;
                     case "right":
                         if (checkUpSpace(board, startPosX, startPosY)) return false;
                         if (checkDownSpace(board, startPosX, startPosY)) return false;
                         if (checkRightSpace(board, startPosX, startPosY)) return false;
-                        startPosX += 1;
                         break;
 
                     case "up":
                         if (checkLeftSpace(board, startPosX, startPosY)) return false;
                         if (checkRightSpace(board, startPosX, startPosY)) return false;
                         if (checkUpSpace(board, startPosX, startPosY)) return false;
-                        startPosY -= 1;
                         break;
                     case "down":
                         if (checkLeftSpace(board, startPosX, startPosY)) return false;
                         if (checkRightSpace(board, startPosX, startPosY)) return false;
                         if (checkDownSpace(board, startPosX, startPosY)) return false;
-                        startPosY += 1;
                         break;
                 }
             }
@@ -133,7 +129,7 @@ public class Shipyard {
     }
 
     public boolean checkLeftSpace(square board[][], int startPosX, int startPosY) {
-        if (startPosX - 1 == 0) {
+        if (startPosX - 1 <= 0) {
             return false;
         } else {
             if (board[startPosX - 1][startPosY].getName() == "S") {
@@ -144,7 +140,7 @@ public class Shipyard {
     }
 
     public boolean checkRightSpace(square board[][], int startPosX, int startPosY) {
-        if (startPosX + 1 == 10) {
+        if (startPosX + 1 <= 10) {
             return false;
         } else {
             if (board[startPosX + 1][startPosY].getName() == "S") {
@@ -155,7 +151,7 @@ public class Shipyard {
     }
 
     public boolean checkUpSpace(square board[][], int startPosX, int startPosY) {
-        if (startPosY - 1 == 0) {
+        if (startPosY - 1 <= 0) {
             return false;
         } else {
             if (board[startPosX][startPosY - 1].getName() == "S") {
@@ -166,7 +162,7 @@ public class Shipyard {
     }
 
     public boolean checkDownSpace(square board[][], int startPosX, int startPosY) {
-        if (startPosY + 1 == 10) {
+        if (startPosY + 1 <= 10) {
             return false;
         } else {
             if (board[startPosX][startPosY + 1].getName() == "S") {
