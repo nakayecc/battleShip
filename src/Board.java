@@ -40,7 +40,7 @@ public class Board {
             for(int j = 0; j < gameBoard.length; j++)
             {
                 System.out.print(pipeVertical + " ");
-                System.out.print(gameBoard[i][j].getName() + " ");
+                System.out.print(gameBoard[j][i].getName() + " ");
             }
             System.out.println(pipeVertical);
         }
