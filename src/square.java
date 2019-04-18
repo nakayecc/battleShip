@@ -4,12 +4,13 @@ public class square {
     private boolean isShip;
     private boolean isHit;
     private ShipPart shipPart;
-
+    private String name;
     public square(int x, int y) {
         this.xPos = x;
         this.yPos = y;
         this.isShip = false;
         this.isHit = false;
+        this.name = "W";
 
 
     }
@@ -37,12 +38,16 @@ public class square {
     public void setShipPart(ShipPart shipPart) {
         this.shipPart = shipPart;
         this.isShip = true;
+        this.name = "S";
     }
 
     public ShipPart getShipPart() {
         return shipPart;
     }
 
+    public String getName() {
+        return name;
+    }
 
     @Override
     public String toString() {
