@@ -3,10 +3,11 @@ import java.util.List;
 
 public class Shipyard {
     private List fleet;
+    private square square;
     private square board[][];
     private Board boardTable;
 
-    public Shipyard(Board board) {
+    public Shipyard(Board board) { //player
         this.boardTable = board;
         this.board = boardTable.getGameBoard();
         this.fleet = new ArrayList();
@@ -15,7 +16,6 @@ public class Shipyard {
 
 
     public void makeShip(String shipClass, int posX, int posY, String direction) {
-        List<square> ship = new ArrayList();
         int shipLen = 0;
         int endPosX = 0;
         int endPosY = 0;
@@ -59,9 +59,13 @@ public class Shipyard {
 
 
         if (checkSpace(board, posX, posY, endPosX, endPosY, shipLen, "left")) {
+            Ship ship = new Ship(shipLen);
             for (int len = 0; len < shipLen; len++) {
-                board[posX][posY].setName("S");
-                ship.add(board[posX][posY]);
+                ShipPart shipPart = new ShipPart(posX, posY);
+                board[posX][posY].setShipPart(shipPart);
+                ship.addShipPart(shipPart);
+
+
                 if (direction == "left") {
                     posX -= 1;
                 } else if (direction == "right") {
@@ -72,7 +76,7 @@ public class Shipyard {
                     posY += 1;
                 }
             }
-            fleet.add(ship);
+            fleet.add(ship.getShipParts());
         }
     }
 
@@ -121,6 +125,8 @@ public class Shipyard {
                         if (checkLeftSpace(board, startPosX, startPosY)) return false;
                         if (checkRightSpace(board, startPosX, startPosY)) return false;
                         if (checkDownSpace(board, startPosX, startPosY)) return false;
+
+
                         break;
                 }
             }
@@ -132,7 +138,7 @@ public class Shipyard {
         if (startPosX - 1 <= 0) {
             return false;
         } else {
-            if (board[startPosX - 1][startPosY].getName() == "S") {
+            if (board[startPosX - 1][startPosY].isShip()) {
                 return true;
             }
         }
@@ -143,7 +149,7 @@ public class Shipyard {
         if (startPosX + 1 <= 10) {
             return false;
         } else {
-            if (board[startPosX + 1][startPosY].getName() == "S") {
+            if (board[startPosX + 1][startPosY].isShip()) {
                 return true;
             }
         }
@@ -154,7 +160,7 @@ public class Shipyard {
         if (startPosY - 1 <= 0) {
             return false;
         } else {
-            if (board[startPosX][startPosY - 1].getName() == "S") {
+            if (board[startPosX][startPosY - 1].isShip()) {
                 return true;
             }
         }
@@ -165,7 +171,7 @@ public class Shipyard {
         if (startPosY + 1 <= 10) {
             return false;
         } else {
-            if (board[startPosX][startPosY + 1].getName() == "S") {
+            if (board[startPosX][startPosY + 1].isShip()) {
                 return true;
             }
         }
@@ -173,7 +179,7 @@ public class Shipyard {
     }
 
     public boolean checkMiddleSpace(square board[][], int startPosX, int startPosY) {
-        if (board[startPosX][startPosY].getName() == "S") {
+        if (board[startPosX][startPosY].isShip()) {
             return true;
         }
         return false;
