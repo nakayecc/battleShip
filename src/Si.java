@@ -7,7 +7,7 @@ public class Si {
     private boolean siTurn;
 
 
-    public Si(Board board){
+    public Si(Board board) {
         this.board = board;
         this.gameBoard = board.getGameBoard();
     }
@@ -29,13 +29,14 @@ public class Si {
     }
 
 
-    public void siStartGame(){
+    public void siStartGame() {
 
         shot(this.difficulty);
         System.out.println("fsdf");
 
 
     }
+
     private void shot(int difficulty) {
         while (siTurn) {
             Random randomCoordinates = new Random();
@@ -44,7 +45,7 @@ public class Si {
 
             switch (difficulty) {
                 case 1: {
-                    if (gameBoard[x][y].getName() == "S") {
+                    if (gameBoard[x][y].getName() == "S" || gameBoard[x][y].getName() == "X") {
                         gameBoard[x][y].setName("X");
                         gameBoard[x][y].setDestroyed(true);
                     } else {
@@ -58,7 +59,7 @@ public class Si {
                     if (gameBoard[x][y].getName() == "S") {
                         gameBoard[x][y].setName("X");
                         gameBoard[x][y].setDestroyed(true);
-                        checkAreaNearHiddenPlace(x,y);
+                        checkAreaNearHitPlaceLevelMedium(x, y);
 
                     } else {
                         gameBoard[x][y].setName("O");
@@ -66,36 +67,94 @@ public class Si {
                     }
 
 
-
                 }
             }
         }
     }
-    private void checkAreaNearHiddenPlace(int x, int y){
+
+    private void checkAreaNearHitPlaceLevelMedium(int x, int y) {
         // x right left
         //y up down
         //check right left area
-        int right = x + 1;
-        int left =  x - 1;
-        int up = y + 1;
-        int down = y -1;
-        if (x < 9 && x > 0) {
-            if (gameBoard[right][y].getName() == "S") {
-                gameBoard[right][y].setName("X");
-                gameBoard[right][y].setDestroyed(true);
-            } else if (gameBoard[left][y].getName() == "S") {
-                gameBoard[left][y].setName("X");
-                gameBoard[left][y].setDestroyed(true);
-            }
-        } else if(y < 9 && y > 0){
-            if (gameBoard[x][up].getName() == "S") {
-                gameBoard[x][up].setName("X");
-                gameBoard[x][up].setDestroyed(true);
-            } else if (gameBoard[x][down].getName() == "S") {
-                gameBoard[x][down].setName("X");
-                gameBoard[x][down].setDestroyed(true);
+        int oldXright = x;
+        int oldXleft = x;
+        int oldYup = y;
+        int oldYdown = y;
+        int right = oldXright + 1;
+        int left = oldXleft - 1;
+        int up = oldYup + 1;
+        int down = oldYdown - 1;
+        Random randomDirection = new Random();
+        int direction = randomDirection.nextInt(3);
+        System.out.println(direction);
+
+
+        while(siTurn) {
+            /*direction 0 = right
+            1 = left
+            2 = up
+            3 = down
+             */
+
+            switch (direction) {
+                case 0: {
+                    if (x < 9) {
+                        if (gameBoard[right][y].getName() == "S" || gameBoard[right][y].getName() == "X") {
+                            gameBoard[right][y].setName("X");
+                            gameBoard[right][y].setDestroyed(true);
+                            oldXright = right;
+                        } else {
+                            gameBoard[right][y].setName("O");
+                            this.siTurn = false;
+                        }
+                    } else {
+                        direction = 1;
+                    }
+
+                }
+                case 1: {
+                    if (x > 0) {
+                        if (gameBoard[left][y].getName() == "S" || gameBoard[left][y].getName() == "X") {
+                            gameBoard[left][y].setName("X");
+                            gameBoard[left][y].setDestroyed(true);
+                            oldXleft = left;
+                        } else {
+                            gameBoard[left][y].setName("O");
+                            this.siTurn = false;
+                        }
+                    } else {
+                        direction = 0;
+                    }
+                }
+                case 2: {
+                    if (y < 9) {
+                        if (gameBoard[x][up].getName() == "S" || gameBoard[x][up].getName() == "X") {
+                            gameBoard[x][up].setName("X");
+                            gameBoard[x][up].setDestroyed(true);
+                            oldYup = up;
+                        } else {
+                            gameBoard[x][up].setName("O");
+                            this.siTurn = false;
+                        }
+                    } else {
+                        direction = 3;
+                    }
+                }
+                case 3: {
+                    if (y > 0) {
+                        if (gameBoard[x][down].getName() == "S" || gameBoard[x][down].getName() == "X") {
+                            gameBoard[x][down].setName("X");
+                            gameBoard[x][down].setDestroyed(true);
+                            oldYdown = down;
+                        } else {
+                            gameBoard[x][down].setName("O");
+                            this.siTurn = false;
+                        }
+                    } else {
+                        direction = 2;
+                    }
+                }
             }
         }
-
     }
 }
