@@ -1,17 +1,13 @@
 public class square {
     private int xPos;
     private int yPos;
-    private boolean isShip;
-    private boolean isHit;
-    private ShipPart shipPart;
     private String name;
+    private boolean isDestroyed;
+
     public square(int x, int y) {
         this.xPos = x;
         this.yPos = y;
-        this.isShip = false;
-        this.isHit = false;
-        this.name = "W";
-
+        this.name=" ";
 
     }
 
@@ -23,26 +19,15 @@ public class square {
         return yPos;
     }
 
-    public boolean isShip() {
-        return isShip;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public boolean isHit() {
-        return isHit;
+    public void setDestroyed(boolean destroyed) {
+        isDestroyed = destroyed;
     }
-
-    public void setHit(boolean hit) {
-        isHit = hit;
-    }
-
-    public void setShipPart(ShipPart shipPart) {
-        this.shipPart = shipPart;
-        this.isShip = true;
-        this.name = "S";
-    }
-
-    public ShipPart getShipPart() {
-        return shipPart;
+    public boolean getDestroyed(){
+        return isDestroyed;
     }
 
     public String getName() {
@@ -51,6 +36,6 @@ public class square {
 
     @Override
     public String toString() {
-        return xPos +" "+ yPos +" ";
+        return xPos +" "+ yPos +" "+ name;
     }
 }

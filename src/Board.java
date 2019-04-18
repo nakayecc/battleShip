@@ -10,6 +10,11 @@ public class Board {
                 gameBoard[i][j] = new square(i, j);
             }
         }
+
+        gameBoard[1][2].setName("S");
+        gameBoard[2][2].setName("S");
+        gameBoard[3][2].setName("S");
+
     }
 
 
@@ -17,7 +22,7 @@ public class Board {
         char pipeVertical = '\u2502';
         char pipeHorizontal = '\u2015';
         String topMarks = "ABCDEFGHIJ";
-        String sideMarks = "1234567890";
+        String sideMarks = "0123456789";
 
         String separator = "";
 
@@ -40,15 +45,14 @@ public class Board {
             for(int j = 0; j < gameBoard.length; j++)
             {
                 System.out.print(pipeVertical + " ");
-                System.out.print(gameBoard[j][i].getName() + " ");
+                System.out.print(gameBoard[i][j].getName() + " ");
             }
             System.out.println(pipeVertical);
         }
         System.out.println(separator);
     }
 
-    public  square[][] getGameBoard() {
+    public square[][] getGameBoard() {
         return gameBoard;
     }
 }
-
