@@ -54,7 +54,7 @@ public class HandleGame
             System.out.println("Miss!");
             board.getGameBoard()[x][y].setName("O");
             player.setTurn(false);
-            si.setDifficulty(2);
+            si.setDifficulty(3);
             si.setSiTurn(true);
         }
     }
