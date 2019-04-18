@@ -11,19 +11,13 @@ public class Board {
             }
         }
 
-        gameBoard[1][2].setName("S");
-        gameBoard[2][2].setName("S");
-        gameBoard[3][2].setName("S");
-
     }
 
-
-    public void printBoard() {
+    public void printBoard(Board board) {
         char pipeVertical = '\u2502';
         char pipeHorizontal = '\u2015';
         String topMarks = "ABCDEFGHIJ";
         String sideMarks = "0123456789";
-
         String separator = "";
 
         int n = 42;
@@ -38,14 +32,14 @@ public class Board {
         }
         System.out.println();
 
-        for(int i = 0; i < gameBoard.length; i++)
+        for(int i = 0; i < board.getGameBoard().length; i++)
         {
             System.out.println(separator);
             System.out.print(sideMarks.charAt(i));
-            for(int j = 0; j < gameBoard.length; j++)
+            for(int j = 0; j < board.getGameBoard().length; j++)
             {
                 System.out.print(pipeVertical + " ");
-                System.out.print(gameBoard[i][j].getName() + " ");
+                System.out.print(board.getGameBoard()[i][j].getName() + " ");
             }
             System.out.println(pipeVertical);
         }

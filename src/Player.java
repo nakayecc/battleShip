@@ -43,7 +43,6 @@ public class Player {
 
     }
 
-
     public boolean getTurn() {
         return turn;
     }
@@ -56,6 +55,9 @@ public class Player {
         return score;
     }
 
+    public Board getBoard() {
+        return board;
+    }
 
     public void setScore(int score) {
         this.score = score;

@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Ship {
     private int size;
-    List<ShipPart> shipParts;
+    private List<ShipPart> shipParts;
 
 
     public Ship(int size) {

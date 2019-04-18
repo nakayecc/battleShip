@@ -53,4 +53,8 @@ public class square {
     public String toString() {
         return xPos +" "+ yPos +" ";
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

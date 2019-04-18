@@ -1,19 +1,23 @@
 import java.sql.Array;
+import java.util.List;
 import java.util.Random;
 
 public class Si {
     private int difficulty;
     private Board board;
-    private square gameBoard[][];
     private boolean siTurn;
+    private Shipyard shipyard;
+    private List<List<ShipPart>> ships;
+
     private square[][] hittinAreaCoordinates = new square[10][10];
 
 
-
-    public Si(Board board) {
+    public Si(Board board, Shipyard shipyard) {
         this.board = board;
-        this.gameBoard = board.getGameBoard();
-        fillHittingCoordinates();
+        this.shipyard = shipyard;
+
+        this.board = board;
+        //fillHittingCoordinates();
     }
 
     public void setSiTurn(boolean siTurn) {
@@ -32,21 +36,41 @@ public class Si {
         return siTurn;
     }
 
+    public Board getBoard() {
+        return board;
+    }
 
-    public void siStartGame() {
+    public void rollShip() {
+
+        Random random = new Random();
+        int index = 0;
+        String[] shipType = {"Carrier", "Battleship", "Cruiser", "Submarine", "Destroyer"};
+        String[] shipDirection = {"left", "right", "up", "down"};
+        do {
+            if (shipyard.makeShip(shipType[index], random.nextInt(9), random.nextInt(9), shipDirection[random.nextInt(4)])) {
+                index += 1;
+            }
+
+        } while (index < 5);
+
+    }
+
+
+    /*    public void siStartGame() {
 
         shot(this.difficulty);
         System.out.println("fsdf");
 
 
-    }
-    private int[] generateRandomCoordinate(){
+    }*/
+
+   /* private int[] generateRandomCoordinate() {
         Random rndCoordinates = new Random();
         int[] randomNumber = new int[2];
         do {
             randomNumber[0] = rndCoordinates.nextInt(hittinAreaCoordinates.length);
             randomNumber[1] = rndCoordinates.nextInt((hittinAreaCoordinates.length));
-        } while(hittinAreaCoordinates[randomNumber[0]][randomNumber[1]] == null);
+        } while (hittinAreaCoordinates[randomNumber[0]][randomNumber[1]] == null);
 
         return randomNumber;
 
@@ -58,9 +82,6 @@ public class Si {
             int[] coordinates = generateRandomCoordinate();
             int x = coordinates[0];
             int y = coordinates[1];
-
-
-
 
 
             switch (difficulty) {
@@ -98,7 +119,6 @@ public class Si {
                     }
 
 
-
                     if (hittinAreaCoordinates[x][y] != null) {
                         if (gameBoard[x][y].getName() == "S" || gameBoard[x][y].getName() == "X") {
                             gameBoard[x][y].setName("X");
@@ -132,12 +152,12 @@ public class Si {
         Random randomDirection = new Random();
         int direction = randomDirection.nextInt(3);
 
-        while(siTurn) {
-            /*direction 0 = right
+        while (siTurn) {
+            direction 0 = right
             1 = left
             2 = up
             3 = down
-             */
+
 
             switch (direction) {
                 case 0: {
@@ -153,7 +173,7 @@ public class Si {
                             this.siTurn = false;
                             break;
                         }
-                    }else {
+                    } else {
                         direction = 1;
                     }
                     break;
@@ -213,6 +233,7 @@ public class Si {
             }
         }
     }
+
     private void checkAreaNearHitPlaceLevelHigh(int x, int y) {
         // x right left
         //y up down
@@ -225,12 +246,12 @@ public class Si {
         int direction = randomDirection.nextInt(3);
         //int direction = 0;
 
-        while(siTurn) {
-            /*direction 0 = right
+        while (siTurn) {
+            direction 0 = right
             1 = left
             2 = up
             3 = down
-             */
+
 
             switch (direction) {
                 case 0: {
@@ -248,7 +269,7 @@ public class Si {
                             this.siTurn = false;
                             break;
                         }
-                    }else {
+                    } else {
                         direction = 1;
                     }
                     break;
@@ -314,14 +335,15 @@ public class Si {
             }
         }
     }
-   private void fillHittingCoordinates(){
-       for (int i = 0; i < 10; i++) {
-           for (int j = 0; j < 10; j++) {
-               this.hittinAreaCoordinates[i][j] = new square(i, j);
-           }
-       }
 
-   }
+    private void fillHittingCoordinates() {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                this.hittinAreaCoordinates[i][j] = new square(i, j);
+            }
+        }
+
+    }*/
 
 
 }

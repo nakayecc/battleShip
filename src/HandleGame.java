@@ -1,20 +1,33 @@
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class HandleGame {
     private Player player;
-    private Board board;
-    private Shipyard shipyard;
+    private Si si;
+    private Board playerBoard;
+    private Board aiBoard;
+    private Shipyard playerShipyard;
+    private Shipyard aiShipyard;
     //private Si si = new Si(board);
     private boolean gameIsRunning;
-    //private int score = player.getScore();
     private List<List<ShipPart>> ships;
 
-    public HandleGame(Board board) {
-        //player = new Player();
-        this.board = board;
-        shipyard = new Shipyard(board);
+    public HandleGame() {
+        this.playerBoard = new Board();
+        this.aiBoard = new Board();
+        this.playerShipyard = new Shipyard(playerBoard);
+        this.aiShipyard = new Shipyard(aiBoard);
+        this.player = new Player(playerShipyard,playerBoard);
+        this.si = new Si(aiBoard,aiShipyard);
+    }
+
+    public void gameInitialization(){
+        Board playerBoard = new Board();
+        Board aiBoard = new Board();
+        player.rollShip();
+        si.rollShip();
+        printPlayerBoard();
+        printAiBoard();
+
     }
 
 
@@ -22,7 +35,11 @@ public class HandleGame {
         return player;
     }
 
-   /* public void runApp() {
+    public Si getSi() {
+        return si;
+    }
+
+    /* public void runApp() {
         Scanner userInput = new Scanner(System.in);
         this.gameIsRunning = true;
         player.setTurn(true);
@@ -77,4 +94,18 @@ public class HandleGame {
     public void setGameIsRunning(boolean gameIsRunning) {
         this.gameIsRunning = gameIsRunning;
     }
+
+
+    public void printPlayerBoard(){
+        playerBoard.printBoard(playerBoard);
+    }
+
+    public void printAiBoard(){
+        aiBoard.printBoard(si.getBoard());
+    }
+
+
+   /* public Shipyard getShipyard() {
+        return shipyard;
+    }*/
 }

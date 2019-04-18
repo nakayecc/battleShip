@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Menu {
     public static void menu()
     {
+
         System.out.println("1. New game\n2. Hall of Fame\n3. Credits\n4. Exit");
 
         Scanner userInput = new Scanner(System.in);
@@ -13,15 +14,18 @@ public class Menu {
             userInput.next();
         }
 
-        Board board = new Board();
-        Shipyard sy = new Shipyard(board);
+       // Board board = new Board();
+       // Shipyard sy = new Shipyard(board);
+       // Player player = new Player(sy,board);
+        HandleGame handleGame = new HandleGame();
 
         switch(userInput.nextInt())
         {
             case 1:
-                sy.makeShip("Carrier",1,2,"down");
-                System.out.println(board.getGameBoard()[1][2].isShip());
-                board.printBoard();
+                handleGame.gameInitialization();
+
+
+
                 break;
             case 2:
                 System.out.println("Hall of fame");
