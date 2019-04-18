@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Player {
     private boolean turn;
@@ -25,6 +26,21 @@ public class Player {
             }
         }
         board.getGameBoard()[x][y].setName("O");
+    }
+
+    public void rollShip() {
+
+        Random random = new Random();
+        int index = 0;
+        String[] shipType = {"Carrier", "Battleship", "Cruiser", "Submarine", "Destroyer"};
+        String[] shipDirection = {"left", "right", "up", "down"};
+        do {
+            if (shipyard.makeShip(shipType[index], random.nextInt(9), random.nextInt(9), shipDirection[random.nextInt(4)])) {
+                index += 1;
+            }
+
+        } while (index < 5);
+
     }
 
 

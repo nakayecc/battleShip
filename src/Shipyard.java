@@ -1,20 +1,19 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Shipyard {
     private List fleet;
-    private square board[][];
     private Board boardTable;
 
     public Shipyard(Board board) { //player
         this.boardTable = board;
-        this.board = boardTable.getGameBoard();
         this.fleet = new ArrayList();
 
     }
 
 
-    public void makeShip(String shipClass, int posX, int posY, String direction) {
+    public boolean makeShip(String shipClass, int posX, int posY, String direction) {
         int shipLen = 0;
         int endPosX = 0;
         int endPosY = 0;
@@ -57,11 +56,11 @@ public class Shipyard {
         }
 
 
-        if (checkSpace(board, posX, posY, endPosX, endPosY, shipLen, direction)) {
+        if (checkSpace(boardTable.getGameBoard(), posX, posY, endPosX, endPosY, shipLen, direction)) {
             Ship ship = new Ship(shipLen);
             for (int len = 0; len < shipLen; len++) {
                 ShipPart shipPart = new ShipPart(posX, posY);
-                board[posX][posY].setShipPart(shipPart);
+                boardTable.getGameBoard()[posX][posY].setShipPart(shipPart);
                 ship.addShipPart(shipPart);
 
 
@@ -76,11 +75,12 @@ public class Shipyard {
                 }
             }
             fleet.add(ship.getShipParts());
+            return true;
         } else {
-            System.out.println("Error");}
+            return false;
+        }
 
     }
-
 
     public boolean checkSpace(square board[][], int startPosX, int startPosY, int endPosX, int endPosY, int shipLen, String direcion) {
 
@@ -93,42 +93,43 @@ public class Shipyard {
 
         for (int shipPart = 0; shipPart < shipLen; shipPart++) {
 
-                switch (direcion) {
-                    case "left":
-                        if (checkMiddleSpace(board, startPosX, startPosY)) return false;
-                        if (checkUpSpace(board, startPosX, startPosY)) return false;
-                        if (checkDownSpace(board, startPosX, startPosY)) return false;
-                        if (checkLeftSpace(board, startPosX, startPosY)) return false;
-                        startPosX -= 1;
-                        break;
-                    case "right":
-                        if (checkMiddleSpace(board, startPosX, startPosY)) return false;
-                        if (checkUpSpace(board, startPosX, startPosY)) return false;
-                        if (checkDownSpace(board, startPosX, startPosY)) return false;
-                        if (checkRightSpace(board, startPosX, startPosY)) return false;
-                        startPosX += 1;
-                        break;
+            switch (direcion) {
+                case "left":
+                    if (checkMiddleSpace(board, startPosX, startPosY)) return false;
+                    if (checkUpSpace(board, startPosX, startPosY)) return false;
+                    if (checkDownSpace(board, startPosX, startPosY)) return false;
+                    if (checkLeftSpace(board, startPosX, startPosY)) return false;
+                    startPosX -= 1;
+                    break;
+                case "right":
+                    if (checkMiddleSpace(board, startPosX, startPosY)) return false;
+                    if (checkUpSpace(board, startPosX, startPosY)) return false;
+                    if (checkDownSpace(board, startPosX, startPosY)) return false;
+                    if (checkRightSpace(board, startPosX, startPosY)) return false;
+                    startPosX += 1;
+                    break;
 
-                    case "up":
-                        if (checkMiddleSpace(board, startPosX, startPosY)) return false;
-                        if (checkLeftSpace(board, startPosX, startPosY)) return false;
-                        if (checkRightSpace(board, startPosX, startPosY)) return false;
-                        if (checkUpSpace(board, startPosX, startPosY)) return false;
-                        startPosY -= 1;
-                        break;
-                    case "down":
-                        if (checkMiddleSpace(board, startPosX, startPosY)) return false;
-                        if (checkLeftSpace(board, startPosX, startPosY)) return false;
-                        if (checkRightSpace(board, startPosX, startPosY)) return false;
-                        if (checkDownSpace(board, startPosX, startPosY)) return false;
-                        startPosY += 1;
-                        break;
-                }
-            }return true;
+                case "up":
+                    if (checkMiddleSpace(board, startPosX, startPosY)) return false;
+                    if (checkLeftSpace(board, startPosX, startPosY)) return false;
+                    if (checkRightSpace(board, startPosX, startPosY)) return false;
+                    if (checkUpSpace(board, startPosX, startPosY)) return false;
+                    startPosY -= 1;
+                    break;
+                case "down":
+                    if (checkMiddleSpace(board, startPosX, startPosY)) return false;
+                    if (checkLeftSpace(board, startPosX, startPosY)) return false;
+                    if (checkRightSpace(board, startPosX, startPosY)) return false;
+                    if (checkDownSpace(board, startPosX, startPosY)) return false;
+                    startPosY += 1;
+                    break;
+            }
+        }
+        return true;
     }
 
     public boolean checkLeftSpace(square board[][], int startPosX, int startPosY) {
-        if (startPosX - 1 < 0) {
+        if (startPosX - 1 <= 0) {
             return false;
         } else {
             if (board[startPosX - 1][startPosY].isShip()) {
@@ -139,7 +140,7 @@ public class Shipyard {
     }
 
     public boolean checkRightSpace(square board[][], int startPosX, int startPosY) {
-        if (startPosX + 1 > 10) {
+        if (startPosX + 1 >= 10) {
             return false;
         } else {
             if (board[startPosX + 1][startPosY].isShip()) {
@@ -150,7 +151,7 @@ public class Shipyard {
     }
 
     public boolean checkUpSpace(square board[][], int startPosX, int startPosY) {
-        if (startPosY - 1 < 0) {
+        if (startPosY - 1 <= 0) {
             return false;
         } else {
             if (board[startPosX][startPosY - 1].isShip()) {
@@ -161,7 +162,7 @@ public class Shipyard {
     }
 
     public boolean checkDownSpace(square board[][], int startPosX, int startPosY) {
-        if (startPosY + 1 > 10) {
+        if (startPosY + 1 >= 10) {
             return false;
         } else {
             if (board[startPosX][startPosY + 1].isShip()) {
