@@ -72,10 +72,8 @@ public class Shipyard {
                     posY += 1;
                 }
             }
+            fleet.add(ship);
         }
-        fleet.add(ship);
-
-
     }
 
 
@@ -90,52 +88,97 @@ public class Shipyard {
 
         for (int shipPart = 0; shipPart < shipLen; shipPart++) {
             if (shipPart == 0) {
-                if (checkFirstSingleSquare(board, startPosX, startPosY)) {
+                if (checkMiddleSpace(board, startPosX, startPosY)) {
                     return false;
                 }
-            } else if (checkMiddleSingleSquare(board, startPosX, startPosY, direcion)) {
-                return false;
-            }
-            if (direcion == "left") {
-                startPosY -= 1;
-            } else if (direcion == "right") {
-                startPosY -= 1;
-            } else if (direcion == "up") {
-                startPosX += 1;
-            } else if (direcion == "down") {
-                startPosX -= 1;
+            } else {
+
+                switch (direcion) {
+                    case "left":
+                        System.out.println("shout");
+                        if (checkUpSpace(board, startPosX, startPosY)) {
+                            return false;
+                        }
+                        if (checkDownSpace(board, startPosX, startPosY)) {
+                            return false;
+                        }
+                        if (checkLeftSpace(board, startPosX, startPosY)) {
+                            return false;
+                        }
+                        startPosX -= 1;
+                        break;
+                    case "right":
+                        if (checkUpSpace(board, startPosX, startPosY)) return false;
+                        if (checkDownSpace(board, startPosX, startPosY)) return false;
+                        if (checkRightSpace(board, startPosX, startPosY)) return false;
+                        startPosX += 1;
+                        break;
+
+                    case "up":
+                        if (checkLeftSpace(board, startPosX, startPosY)) return false;
+                        if (checkRightSpace(board, startPosX, startPosY)) return false;
+                        if (checkUpSpace(board, startPosX, startPosY)) return false;
+                        startPosY -= 1;
+                        break;
+                    case "down":
+                        if (checkLeftSpace(board, startPosX, startPosY)) return false;
+                        if (checkRightSpace(board, startPosX, startPosY)) return false;
+                        if (checkDownSpace(board, startPosX, startPosY)) return false;
+                        startPosY += 1;
+                        break;
+                }
             }
         }
         return true;
     }
 
-    public boolean checkFirstSingleSquare(square board[][], int startPosX, int startPosY) {
-
-        if (board[startPosX][startPosY].getName() == "S" || board[startPosX - 1][startPosY].getName() == "S" ||
-                board[startPosX][startPosY + 1].getName() == "S" || board[startPosX][startPosY - 1].getName() == "S" ||
-                board[startPosX + 1][startPosY].getName() == "S") {
-            return true;
+    public boolean checkLeftSpace(square board[][], int startPosX, int startPosY) {
+        if (startPosX - 1 == 0) {
+            return false;
+        } else {
+            if (board[startPosX - 1][startPosY].getName() == "S") {
+                return true;
+            }
         }
         return false;
     }
 
-    public boolean checkMiddleSingleSquare(square board[][], int startPosX, int startPosY, String direction) {
-        if (direction == "left") {
-            if (board[startPosX][startPosY + 1].getName() == "S" || board[startPosX][startPosY - 1].getName() == "S" || board[startPosX - 1][startPosY].getName() == "S") {
+    public boolean checkRightSpace(square board[][], int startPosX, int startPosY) {
+        if (startPosX + 1 == 10) {
+            return false;
+        } else {
+            if (board[startPosX + 1][startPosY].getName() == "S") {
                 return true;
             }
-        } else if (direction == "right") {
-            if (board[startPosX][startPosY + 1].getName() == "S" || board[startPosX][startPosY - 1].getName() == "S" || board[startPosX + 1][startPosY].getName() == "S") {
+        }
+        return false;
+    }
+
+    public boolean checkUpSpace(square board[][], int startPosX, int startPosY) {
+        if (startPosY - 1 == 0) {
+            return false;
+        } else {
+            if (board[startPosX][startPosY - 1].getName() == "S") {
                 return true;
             }
-        } else if (direction == "up") {
-            if (board[startPosX + 1][startPosY].getName() == "S" || board[startPosX][startPosY - 1].getName() == "S" || board[startPosX][startPosY + 1].getName() == "S") {
+        }
+        return false;
+    }
+
+    public boolean checkDownSpace(square board[][], int startPosX, int startPosY) {
+        if (startPosY + 1 == 10) {
+            return false;
+        } else {
+            if (board[startPosX][startPosY + 1].getName() == "S") {
                 return true;
             }
-        } else if (direction == "down") {
-            if (board[startPosX - 1][startPosY].getName() == "S" || board[startPosX][startPosY - 1].getName() == "S" || board[startPosX][startPosY + 1].getName() == "S") {
-                return true;
-            }
+        }
+        return false;
+    }
+
+    public boolean checkMiddleSpace(square board[][], int startPosX, int startPosY) {
+        if (board[startPosX][startPosY].getName() == "S") {
+            return true;
         }
         return false;
     }
