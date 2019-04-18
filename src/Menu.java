@@ -19,6 +19,8 @@ public class Menu {
         switch(userInput.nextInt())
         {
             case 1:
+                sy.makeShip("Carrier",1,2,"down");
+                System.out.println(board.getGameBoard()[1][2].isShip());
                 board.printBoard();
                 break;
             case 2:

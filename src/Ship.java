@@ -6,12 +6,12 @@ public class Ship {
     List<ShipPart> shipParts;
 
 
-    public Ship(int size){
+    public Ship(int size) {
         this.size = size;
         shipParts = new ArrayList<>();
     }
 
-    public void addShipPart(ShipPart shipPart){
+    public void addShipPart(ShipPart shipPart) {
         shipParts.add(shipPart);//todo: checksize
     }
 
@@ -19,8 +19,17 @@ public class Ship {
         return shipParts;
     }
 
-    boolean isShipLive(){
-        //todo: implement
+    boolean isShipLive() {
+        int counter = 0;
+        for (int singlepart = 0; singlepart < shipParts.size(); singlepart++) {
+            if (shipParts.get(singlepart).isHit()) {
+                counter += 1;
+            }
+        }
+
+        if (counter == shipParts.size()) {
+            return false;
+        }
 
         return true;
     }

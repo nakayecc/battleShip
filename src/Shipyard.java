@@ -3,7 +3,6 @@ import java.util.List;
 
 public class Shipyard {
     private List fleet;
-    private square square;
     private square board[][];
     private Board boardTable;
 

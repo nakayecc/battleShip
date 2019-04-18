@@ -10,7 +10,7 @@ public class square {
         this.yPos = y;
         this.isShip = false;
         this.isHit = false;
-        this.name = "W";
+        this.name = " ";
 
 
     }
