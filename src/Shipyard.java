@@ -50,11 +50,11 @@ public class Shipyard {
                 break;
             case "up":
                 endPosX = posX;
-                endPosY = posY + shipLen;
+                endPosY = posY - shipLen;
                 break;
             case "down":
                 endPosX = posX;
-                endPosY = posY - shipLen;
+                endPosY = posY + shipLen;
         }
 
 
