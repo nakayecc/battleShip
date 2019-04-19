@@ -3,12 +3,10 @@ import java.util.List;
 
 public class Shipyard {
     private List fleet;
-    private square board[][];
-    private Board boardTable;
+    private Board board;
 
     public Shipyard(Board board) { //player
-        this.boardTable = board;
-        this.board = boardTable.getGameBoard();
+        this.board = board;
         this.fleet = new ArrayList();
 
     }
@@ -29,6 +27,7 @@ public class Shipyard {
                 break;
             case "Cruiser":
                 shipLen = 3;
+                //System.out.println("Robie crusiera");
                 break;
             case "Submarine":
                 shipLen = 3;
@@ -46,6 +45,7 @@ public class Shipyard {
             case "right":
                 endPosX = posX + shipLen;
                 endPosY = posY;
+                //System.out.println("Robie crusiera prawo");
                 break;
             case "up":
                 endPosX = posX;
@@ -57,12 +57,16 @@ public class Shipyard {
         }
 
 
-        if (checkSpace(board, posX, posY, endPosX, endPosY, shipLen, direction)) {
+        if (checkSpace(this.board, posX, posY, endPosX, endPosY, shipLen, direction)) {
             Ship ship = new Ship(shipLen);
+            board.setStatek(ship);
             for (int len = 0; len < shipLen; len++) {
                 ShipPart shipPart = new ShipPart(posX, posY);
-                board[posX][posY].setShipPart(shipPart);
-                ship.addShipPart(shipPart);
+                System.out.println("Robie szip parta");
+                System.out.println(posX + " " + posY);
+
+                //this.board.setShipPart(shipPart);
+                ship.addShipPart(shipPart, board);
 
 
                 if (direction == "left") {
@@ -82,7 +86,8 @@ public class Shipyard {
     }
 
 
-    public boolean checkSpace(square board[][], int startPosX, int startPosY, int endPosX, int endPosY, int shipLen, String direcion) {
+
+    public boolean checkSpace(Board board, int startPosX, int startPosY, int endPosX, int endPosY, int shipLen, String direcion) {
 
         if (startPosX < -1 || startPosY < -1 || endPosX < -1 || endPosY < -1) {
             return false;
@@ -127,52 +132,52 @@ public class Shipyard {
             }return true;
     }
 
-    public boolean checkLeftSpace(square board[][], int startPosX, int startPosY) {
+    public boolean checkLeftSpace(Board board, int startPosX, int startPosY) {
         if (startPosX - 1 < 0) {
             return false;
         } else {
-            if (board[startPosX - 1][startPosY].isShip()) {
+            if (board.isShip()) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean checkRightSpace(square board[][], int startPosX, int startPosY) {
+    public boolean checkRightSpace(Board board, int startPosX, int startPosY) {
         if (startPosX + 1 > 10) {
             return false;
         } else {
-            if (board[startPosX + 1][startPosY].isShip()) {
+            if (board.isShip()) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean checkUpSpace(square board[][], int startPosX, int startPosY) {
+    public boolean checkUpSpace(Board board, int startPosX, int startPosY) {
         if (startPosY - 1 < 0) {
             return false;
         } else {
-            if (board[startPosX][startPosY - 1].isShip()) {
+            if (board.isShip()) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean checkDownSpace(square board[][], int startPosX, int startPosY) {
+    public boolean checkDownSpace(Board board, int startPosX, int startPosY) {
         if (startPosY + 1 > 10) {
             return false;
         } else {
-            if (board[startPosX][startPosY + 1].isShip()) {
+            if (board.isShip()) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean checkMiddleSpace(square board[][], int startPosX, int startPosY) {
-        if (board[startPosX][startPosY].isShip()) {
+    public boolean checkMiddleSpace(Board board, int startPosX, int startPosY) {
+        if (board.isShip()) {
             return true;
         }
         return false;

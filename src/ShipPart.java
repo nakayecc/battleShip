@@ -24,4 +24,6 @@ public class ShipPart {
     public boolean isHit() {
         return isHit;
     }
+
+
 }

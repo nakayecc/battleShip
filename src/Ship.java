@@ -11,8 +11,9 @@ public class Ship {
         shipParts = new ArrayList<>();
     }
 
-    public void addShipPart(ShipPart shipPart) {
+    public void addShipPart(ShipPart shipPart, Board board) {
         shipParts.add(shipPart);//todo: checksize
+        board.setCoordinates(shipPart.getX(),shipPart.getY(), shipPart);
     }
 
     public List<ShipPart> getShipParts() {
