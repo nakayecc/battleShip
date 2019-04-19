@@ -63,15 +63,19 @@ public class Shipyard {
                 boardTable.getGameBoard()[posX][posY].setShipPart(shipPart);
                 ship.addShipPart(shipPart);
 
-
-                if (direction == "left") {
-                    posX -= 1;
-                } else if (direction == "right") {
-                    posX += 1;
-                } else if (direction == "up") {
-                    posY -= 1;
-                } else if (direction == "down") {
-                    posY += 1;
+                switch (direction) {
+                    case "left":
+                        posX -= 1;
+                        break;
+                    case "right":
+                        posX += 1;
+                        break;
+                    case "up":
+                        posY -= 1;
+                        break;
+                    case "down":
+                        posY += 1;
+                        break;
                 }
             }
             fleet.add(ship.getShipParts());

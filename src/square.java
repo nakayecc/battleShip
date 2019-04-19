@@ -39,6 +39,7 @@ public class square {
         this.shipPart = shipPart;
         this.isShip = true;
         this.name = "S";
+        System.out.println(this.xPos + this.yPos);
     }
 
     public ShipPart getShipPart() {

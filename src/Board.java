@@ -16,7 +16,7 @@ public class Board {
     public void printBoard(Board board) {
         char pipeVertical = '\u2502';
         char pipeHorizontal = '\u2015';
-        String topMarks = "ABCDEFGHIJ";
+        String topMarks = "0123456789";
         String sideMarks = "0123456789";
         String separator = "";
 
@@ -39,7 +39,7 @@ public class Board {
             for(int j = 0; j < board.getGameBoard().length; j++)
             {
                 System.out.print(pipeVertical + " ");
-                System.out.print(board.getGameBoard()[i][j].getName() + " ");
+                System.out.print(board.getGameBoard()[j][i].getName() + " ");
             }
             System.out.println(pipeVertical);
         }

@@ -40,6 +40,10 @@ public class Si {
         return board;
     }
 
+    public List<List<ShipPart>> getShips() {
+        return ships;
+    }
+
     public void rollShip() {
 
         Random random = new Random();
@@ -52,6 +56,7 @@ public class Si {
             }
 
         } while (index < 5);
+        ships = shipyard.getFleet();
 
     }
 

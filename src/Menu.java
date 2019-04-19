@@ -23,7 +23,7 @@ public class Menu {
         {
             case 1:
                 handleGame.gameInitialization();
-
+                handleGame.playGame();
 
 
                 break;
