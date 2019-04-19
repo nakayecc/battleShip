@@ -13,6 +13,53 @@ public class Board {
 
     }
 
+
+    public void printBoard(Board playerBoard, Board aiBoard) {
+        char pipeVertical = '\u2502';
+        char pipeHorizontal = '\u2015';
+        String topMarks = "0123456789";
+        String sideMarks = "0123456789";
+
+        String separator = "";
+        String spaceBetweenBoards = "       ";
+        String spaceBetweenSeparators = "      ";
+
+        int n = 42;
+        for (int l = 0; l < n; l++) {
+            separator = separator + pipeHorizontal;
+        }
+
+        for (int m = 0; m < topMarks.length(); m++) {
+            System.out.print("   " + topMarks.charAt(m));
+        }
+        System.out.print("        ");
+        for (int o = 0; o < topMarks.length(); o++) {
+            System.out.print("   " + topMarks.charAt(o));
+        }
+
+
+        for (int i = 0; i < playerBoard.gameBoard.length; i++) {
+            System.out.println();
+            System.out.print(separator);
+            System.out.print(spaceBetweenSeparators);
+            System.out.println(separator);
+
+            System.out.print(sideMarks.charAt(i));
+            for (int j = 0; j < playerBoard.gameBoard.length; j++) {
+                System.out.print(pipeVertical + " ");
+                System.out.print(playerBoard.gameBoard[j][i].getName() + " ");
+            }
+
+            System.out.print(spaceBetweenBoards);
+
+            System.out.print(sideMarks.charAt(i));
+            for (int k = 0; k < aiBoard.gameBoard.length; k++) {
+                System.out.print(pipeVertical + " ");
+                System.out.print(aiBoard.gameBoard[k][i].getName() + " ");
+            }
+        }
+    }
+
     public void printBoard(Board board) {
         char pipeVertical = '\u2502';
         char pipeHorizontal = '\u2015';

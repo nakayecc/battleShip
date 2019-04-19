@@ -26,33 +26,52 @@ public class HandleGame {
     }
 
     public void playGame() {
+        int posX = 0;
+        int posY = 0;
         Scanner userInput = new Scanner(System.in);
         while (si.getShips().size() > 0 && player.getShips().size() > 0) {
             System.out.println(si.getShips());
-            printAiBoard();
-            System.out.println("Shoot cord x y");
+            player.getBoard().printBoard(playerBoard, si.getBoard());
+            System.out.print("\nShoot cord x y: ");
+            /*while (!userInput.hasNextInt()) {
+                userInput.nextLine();
+            }
+            while (posX > 10) {
 
-            player.shot(userInput.nextInt(), userInput.nextInt(), si.getShips(), si.getBoard());
+                userInput.nextLine();
+            }*/
+            posX = userInput.nextInt();
+            posY = userInput.nextInt();
+
+            while(posX > 9 || posX < 0 || posY > 9 || posY < 0)
+            {
+                System.out.println("Wrong coords!");
+                posX = userInput.nextInt();
+                posY = userInput.nextInt();
+            }
+
+            player.shot(posX, posY, si.getShips(), si.getBoard());
             isShipSiAllive();
         }
-        if(si.getShips().size() == 0){
+        if (si.getShips().size() == 0) {
             System.out.println("You won this game but not a war");
         } else {
             System.out.println("Not this time a little boy");
         }
+
     }
 
 
-    public void isShipSiAllive(){
+    public void isShipSiAllive() {
         ships = getSi().getShips();
         int counter = 0;
         for (int shipCounter = 0; shipCounter < ships.size(); shipCounter++) {
             for (int shipElement = 0; shipElement < ships.get(shipCounter).size(); shipElement++) {
-                if(ships.get(shipCounter).get(shipElement).isHit()){
-                    counter+=1;
+                if (ships.get(shipCounter).get(shipElement).isHit()) {
+                    counter += 1;
                 }
             }
-            if(counter == ships.get(shipCounter).size()){
+            if (counter == ships.get(shipCounter).size()) {
                 ships.remove(shipCounter);
             }
             counter = 0;
@@ -121,19 +140,11 @@ public class HandleGame {
     }
 */
 
+/*
     public void setGameIsRunning(boolean gameIsRunning) {
         this.gameIsRunning = gameIsRunning;
     }
-
-
-    public void printPlayerBoard() {
-        playerBoard.printBoard(playerBoard);
-    }
-
-    public void printAiBoard() {
-        aiBoard.printBoard(si.getBoard());
-    }
-
+*/
 
    /* public Shipyard getShipyard() {
         return shipyard;
